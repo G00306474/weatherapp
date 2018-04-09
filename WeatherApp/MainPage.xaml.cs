@@ -29,8 +29,13 @@ namespace WeatherApp
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            RootObject myWeather = await OpenWeatherMapProxy.GetWeather(20.3,30.0);
-            string icon = String.Format("http://openweathermap.org/img/w/{0}.png", myWeather.weather[0].icon);
+            var position = await LocationManger.GetPostion();
+
+            RootObject myWeather = await OpenWeatherMapProxy.GetWeather(
+                position.Coordinate.Latitude,
+                position.Coordinate.Longitude);
+
+            string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
             ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
             ResultTextBlock.Text = myWeather.name + " - " + ((int)myWeather.main.temp).ToString() + " - " + myWeather.weather[0].description;
         }

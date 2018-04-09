@@ -17,7 +17,7 @@ namespace WeatherApp
             //Microsoft.net.http ==nuget installed for http client
             var http = new HttpClient();
             //web address just for testing 
-            var response = await http.GetAsync("http://samples.openweathermap.org/data/2.5/weather?lat=53.27&lon=-9.06&appid=5bfe62f124a556092c27cad0f9752109");
+            var response = await http.GetAsync("http://api.openweathermap.org/data/2.5/weather?lat=53.27&lon=-9.06&appid=5bfe62f124a556092c27cad0f9752109");
             var result = await response.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 
