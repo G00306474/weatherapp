@@ -27,17 +27,33 @@ namespace WeatherApp
         {
             this.InitializeComponent();
         }
-        private async void Button_Click(object sender, RoutedEventArgs e)
+      
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var position = await LocationManger.GetPostion();
+            try
+            {
+                var position = await LocationManger.GetPostion();
 
-            RootObject myWeather = await OpenWeatherMapProxy.GetWeather(
-                position.Coordinate.Latitude,
-                position.Coordinate.Longitude);
+                RootObject myWeather = await OpenWeatherMapProxy.GetWeather(
+                    position.Coordinate.Latitude,
+                    position.Coordinate.Longitude);
 
-            string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
-            ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
-            ResultTextBlock.Text = myWeather.name + " - " + ((int)myWeather.main.temp).ToString() + " - " + myWeather.weather[0].description;
+
+
+                string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
+                ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+
+                TempResultTextBlock.Text = "Temperature: " + ((int)myWeather.main.temp).ToString();
+                DescrptionResultTextBlock.Text = "Condition: " + myWeather.weather[0].description;
+                LocationResultTextBlock.Text = "Location: " + myWeather.name;
+
+            }
+            catch  
+            {
+                LocationResultTextBlock.Text = "Error to get Location. Please allow access to location services " ;
+
+            }
+            
         }
-    }
+     }
 }
