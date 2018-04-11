@@ -6,16 +6,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
-
-    <StackPanel Background="MediumPurple">
+    
+        <StackPanel Background="MediumPurple">
         <StackPanel  VerticalAlignment="Center">
-        <!-- <Button Content="Get Weather" Click="Button_Click" HorizontalAlignment="Center"/> -->
-        
+
         <Image x:Name="ResultImage" Width="200" Height="200"  HorizontalAlignment="Center"/>
         <TextBlock x:Name="TempResultTextBlock"  FontSize="52" HorizontalAlignment="Center" />
         <TextBlock x:Name="DescrptionResultTextBlock"  FontSize="36" HorizontalAlignment="Center" />
         <TextBlock x:Name="LocationResultTextBlock" FontSize="24"  HorizontalAlignment="Center" />
        
         </StackPanel>
+        <StackPanel>
+            <Button x:Name="forecast_button" Content="5 Day Forecast" Click="Button_Click" HorizontalAlignment="Center"/>
+            <GridView ItemsSource="{Binding collection}" x:Name="ForecastGridView">
+                <GridView.ItemTemplate>
+                    <DataTemplate >
+                        <StackPanel>
+                            <Image Name="Art" Width="50" Height="50" Source="{Binding list[0].weather[0].icon}"/>
+                            <TextBlock Name="Forecastdatetextblock">
+                                       <Run>Date:</Run>
+                                        <Run Text="{Binding dt_txt}"
+                                        />/</TextBlock>
+                            <TextBlock Name="Forecasttemptextblock">
+                                       <Run>Temp:</Run>
+                                        <Run Text="{Binding main.temp}"
+                                        />/</TextBlock>
+
+                            <TextBlock Name="Forecastdescriptiontextblock">
+                                       <Run>Desc:</Run>
+                                        <Run Text="{Binding weather[0].description}"
+                                        />/</TextBlock>
+                            
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </StackPanel>
+        <TextBlock> <Hyperlink xml:space="preserve"  NavigateUri="https://weatherappproject.weebly.com/">Privacy policy </Hyperlink></TextBlock>
     </StackPanel>
+   
 </Page>

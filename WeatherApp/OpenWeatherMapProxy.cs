@@ -14,21 +14,18 @@ namespace WeatherApp
     {
         public async static Task<RootObject> GetWeather(double lat, double lon)
         {
-            //Microsoft.net.http ==nuget installed for http client
             var http = new HttpClient();
             var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid=5bfe62f124a556092c27cad0f9752109", lat, lon);
-            
-             
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
-
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(result));
             var data = (RootObject)serializer.ReadObject(ms);
             return data;
         }
 
     }
+
     [DataContract]
     public class Coord
     {
@@ -94,6 +91,7 @@ namespace WeatherApp
         [DataMember]
         public int sunset { get; set; }
     }
+    
     [DataContract]
     public class RootObject
     {
@@ -119,5 +117,12 @@ namespace WeatherApp
         public string name { get; set; }
         [DataMember]
         public int cod { get; set; }
+        //[DataMember]
+        //public List<List> list { get; set; }
+
     }
+
+
+
+
 }
