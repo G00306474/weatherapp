@@ -6,7 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
-    
+
+    <ScrollViewer ZoomMode="Enabled" MaxZoomFactor="10"
+              HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible">
+
         <StackPanel Background="MediumPurple">
         <StackPanel  VerticalAlignment="Center">
 
@@ -44,5 +47,5 @@
         </StackPanel>
         <TextBlock> <Hyperlink xml:space="preserve"  NavigateUri="https://weatherappproject.weebly.com/">Privacy policy </Hyperlink></TextBlock>
     </StackPanel>
-   
+    </ScrollViewer>
 </Page>
