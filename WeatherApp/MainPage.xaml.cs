@@ -43,7 +43,7 @@ namespace WeatherApp
                 string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
                 ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
 
-                TempResultTextBlock.Text = "Temperature: " + ((int)myWeather.main.temp).ToString();
+                TempResultTextBlock.Text = "Temperature: " + ((int)myWeather.main.temp).ToString()+ "°C";
                 DescrptionResultTextBlock.Text = "Condition: " + myWeather.weather[0].description;
                 LocationResultTextBlock.Text = "Location: " + myWeather.name;
 
