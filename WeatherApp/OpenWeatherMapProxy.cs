@@ -14,18 +14,26 @@ namespace WeatherApp
     {
         public async static Task<RootObject> GetWeather(double lat, double lon)
         {
+            //HttpClient() Provides a base class for sending HTTP requests and receiving HTTP responses from a resource identified by a URI
             var http = new HttpClient();
+            //calls the openweather api and passes the lon and lat variable 
+            //passes the result inot url 
+            
             var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid=5bfe62f124a556092c27cad0f9752109", lat, lon);
+            // The await operator suspends GetWeather.
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
+            //creates a new MemoryStream with utf8 encodeing that writes result to ms
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(result));
+            //passses me to the serializer and adds to var data
             var data = (RootObject)serializer.ReadObject(ms);
             return data;
         }
 
     }
-
+    //Define the data contract for Coord by attaching the DataContractAttribute 
+    //to the class and DataMemberAttribute attribute to the members you want to serialize
     [DataContract]
     public class Coord
     {

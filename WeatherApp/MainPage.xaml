@@ -6,27 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
-
+    <!-- Calls the method Page_Loaded when the page loads  -->
+   
+    <!-- Adds a scroll wheel around the app -->
     <ScrollViewer ZoomMode="Enabled" MaxZoomFactor="10"
               HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible">
-
+        <!--Adds a background color to the app  -->
         <StackPanel Background="MediumPurple">
-        <StackPanel  VerticalAlignment="Center">
+            <!-- Sets the alignment to the center of the app page -->
+            <StackPanel  VerticalAlignment="Center">
+                <!-- cretes the textblok/image that will have the result passed to -->
+                <!-- Also set the size and the font size used-->
+                <Image x:Name="ResultImage" Width="200" Height="200"  HorizontalAlignment="Center"/>
+                <TextBlock x:Name="TempResultTextBlock"  FontSize="52" HorizontalAlignment="Center" />
+                <TextBlock x:Name="DescrptionResultTextBlock"  FontSize="36" HorizontalAlignment="Center" />
+                <TextBlock x:Name="LocationResultTextBlock" FontSize="24"  HorizontalAlignment="Center" />
 
-        <Image x:Name="ResultImage" Width="200" Height="200"  HorizontalAlignment="Center"/>
-        <TextBlock x:Name="TempResultTextBlock"  FontSize="52" HorizontalAlignment="Center" />
-        <TextBlock x:Name="DescrptionResultTextBlock"  FontSize="36" HorizontalAlignment="Center" />
-        <TextBlock x:Name="LocationResultTextBlock" FontSize="24"  HorizontalAlignment="Center" />
-       
-        </StackPanel>
+            </StackPanel>
         <StackPanel>
-            <Button x:Name="forecast_button" Content="5 Day Forecast" Click="Button_Click" HorizontalAlignment="Center"/>
-            <GridView ItemsSource="{Binding collection}" x:Name="ForecastGridView">
+                <!-- Cool comment -->
+                <Button x:Name="forecast_button" Content="5 Day Forecast" Click="Button_Click" HorizontalAlignment="Center"/>
+                <!-- bindes the collection to itemsource -->
+                <GridView ItemsSource="{Binding collection}" x:Name="ForecastGridView">
                 <GridView.ItemTemplate>
                     <DataTemplate >
                         <StackPanel>
-                            <Image Name="Art" Width="50" Height="50" Source="{Binding list[0].weather[0].icon}"/>
-                            <TextBlock Name="Forecastdatetextblock">
+                             <!-- that will dispaly the binded data will als dispaly the text each time its called -->
+                             <TextBlock Name="Forecastdatetextblock">
                                        <Run>Date:</Run>
                                         <Run Text="{Binding dt_txt}"
                                         />/</TextBlock>
@@ -45,7 +51,8 @@
                 </GridView.ItemTemplate>
             </GridView>
         </StackPanel>
-        <TextBlock> <Hyperlink xml:space="preserve"  NavigateUri="https://weatherappproject.weebly.com/">Privacy policy </Hyperlink></TextBlock>
+            <!-- Text block that contains a http link to the privacy statement on https://weatherappproject.weebly.com/ -->
+            <TextBlock> <Hyperlink xml:space="preserve"  NavigateUri="https://weatherappproject.weebly.com/">Privacy policy </Hyperlink></TextBlock>
     </StackPanel>
     </ScrollViewer>
 </Page>
